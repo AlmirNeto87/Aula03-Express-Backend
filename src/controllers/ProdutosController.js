@@ -12,7 +12,12 @@ class ProdutosController{
     listarPorId(request, response){
         const { id } = request.params;
         const ProdutoId = ProdutoModel.listarPorId(id);
-        return response.send(ProdutoId);
+        if(ProdutoId){
+            return response.send(ProdutoId);
+        }
+        return response.status(404).send({
+            error: "Produto não encontrado"
+        });
     }
 
     criar(request, response){
@@ -25,8 +30,8 @@ class ProdutosController{
 
     atualizar(request, response){
         const { id } = request.params;
-        const { nome, email } = request.body;
-        const ProdutoAtualizado = new ProdutoModel(nome, email);
+        const { nome, valor } = request.body;
+        const ProdutoAtualizado = new ProdutoModel(nome, valor);
         return response.send(ProdutoModel.editarProduto(Number(id), ProdutoAtualizado));
     }
 

@@ -12,7 +12,12 @@ class UsuariosController{
     listarPorId(request, response){
         const { id } = request.params;
         const usuarioId = UsuarioModel.listarPorId(id);
-        return response.send(usuarioId);
+        if (usuarioId) {
+            return response.status(200).send(usuarioId);
+        }
+        return response.status(404).send({
+            error: "Usuário não encontrado"
+        });
     }
 
     criar(request, response){
