@@ -1,6 +1,6 @@
 const express = require('express');
 const ProdutosRoutes = require('./routes/produtosroutes');
-const UsuariosRoutes = require('./routes/usuariosroutes');
+const PrivateRoutes = require('./routes/PrivateRoutes')
 
 const host = "localhost";
 const port = 3000;
@@ -8,7 +8,10 @@ const port = 3000;
 const app = express();
 app.use(express.json());
 app.use(ProdutosRoutes);
-app.use(UsuariosRoutes);
+app.use(PrivateRoutes);
+
+
+
 
 app.get('/', (request, response)=>{
 
