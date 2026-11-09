@@ -2,7 +2,7 @@ class Usuario {
   static listaUsuarios = [];
   static contador = 0;
 
-  constructor(nome, email, password, login) {
+  constructor(nome, email, login, password) {
     this.id = ++Usuario.contador;
     this.nome = nome;
     this.email = email;
@@ -12,6 +12,7 @@ class Usuario {
 
   static authenticate(login,password){
     const userAuthIndex = Usuario.listaUsuarios.findIndex(user => user.login === login && user.password === password);
+    console.log(userAuthIndex+"Debug Usuario.Authenticate");
     return Usuario.listaUsuarios[userAuthIndex];
   }
 

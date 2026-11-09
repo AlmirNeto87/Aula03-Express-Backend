@@ -21,9 +21,9 @@ class UsuariosController{
     }
 
     criar(request, response){
-        const { nome, email } = request.body;
-        console.log(nome, email);
-        const novoUsuario = new UsuarioModel(nome, email);
+        const { nome, email, login , password } = request.body;
+        console.log(nome, email, login , password);
+        const novoUsuario = new UsuarioModel(nome, email, login , password);
         console.log(novoUsuario);
         return response.send(UsuarioModel.adicionarUsuario(novoUsuario));
     }

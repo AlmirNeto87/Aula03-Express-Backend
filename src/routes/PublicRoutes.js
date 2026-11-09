@@ -8,11 +8,11 @@ PublicRoutes.post('/login',(request,response)=>{
     const {login , password} = request.body;
     const auth = new AuthController();
     const dados = auth.login(login, password); 
-
-    if(dados.lenght){
-        const usuario = dados[0];
+    console.log(dados+"debug PublicRoutes")
+    if(dados){
+        
         return response.json({
-            token: usuario
+            token: dados
         });
     };
 
