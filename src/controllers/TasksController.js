@@ -1,17 +1,17 @@
-const taskModel = require('../models/TasksModel');
+const TaskModel = require('../models/TaskModel');
 
 class TasksController{
     
     listar(request, response){
         
         console.log("Listando Tasks!");
-        const listaTasks = taskModel.listar();
+        const listaTasks = TaskModel.listar();
         return response.send(listaTasks);
     }
 
     listarPorId(request, response){
         const { id } = request.params;
-        const taskId = taskModel.listarPorId(id);
+        const taskId = TaskModel.listarPorId(id);
         if (taskId) {
             return response.status(200).send(taskId);
         }
@@ -23,21 +23,21 @@ class TasksController{
     criar(request, response){
         const { nome, descricao } = request.body;
         console.log(nome, descricao);
-        const novaTask = new taskModel(nome, descricao);
+        const novaTask = new TaskModel(nome, descricao);
         console.log(novaTask);
-        return response.send(taskModel.adicionarTask(novaTask));
+        return response.send(TaskModel.adicionarTask(novaTask));
     }
 
     atualizar(request, response){
         const { id } = request.params;
         const { nome, descricao } = request.body;
-        const taskAtualizada = new taskModel(nome, descricao);
-        return response.send(taskModel.editarTask(Number(id), taskAtualizada));
+        const taskAtualizada = new TaskModel(nome, descricao);
+        return response.send(TaskModel.editarTask(Number(id), taskAtualizada));
     }
 
     deletar(request, response){
         const { id } = request.params;
-        return response.send(taskModel.removerTask(Number(id)));
+        return response.send(TaskModel.removerTask(Number(id)));
     }
 
 }

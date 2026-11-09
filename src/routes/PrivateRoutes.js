@@ -1,5 +1,6 @@
 const express = require('express'); 
-const UsuariosRoutes = require('./usuariosroutes');
+const UsuariosRoutes = require('./UsuariosRoutes');
+const TasksRoutes = require('./TasksRoutes');
 
 const PrivateRoutes = express.Router(); // Filtro de Segurança 
 
@@ -22,6 +23,7 @@ PrivateRoutes.use((request, response, next)=>{
 });
 
 PrivateRoutes.use(UsuariosRoutes); 
+PrivateRoutes.use(TasksRoutes);
 
 
 module.exports = PrivateRoutes;

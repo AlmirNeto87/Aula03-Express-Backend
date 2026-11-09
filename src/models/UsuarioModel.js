@@ -2,10 +2,17 @@ class Usuario {
   static listaUsuarios = [];
   static contador = 0;
 
-  constructor(nome, email) {
+  constructor(nome, email, password, login) {
     this.id = ++Usuario.contador;
     this.nome = nome;
     this.email = email;
+    this.login = login;
+    this.password = password
+  }
+
+  static authenticate(login,password){
+    const userAuthIndex = Usuario.listaUsuarios.findIndex(user => user.login === login && user.password === password);
+    return Usuario.listaUsuarios[userAuthIndex];
   }
 
   static listar() {
