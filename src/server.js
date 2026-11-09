@@ -1,6 +1,7 @@
 const express = require('express');
 const ProdutosRoutes = require('./routes/produtosroutes');
-const PrivateRoutes = require('./routes/PrivateRoutes')
+const PrivateRoutes = require('./routes/PrivateRoutes');
+const TasksRoutes = require('./routes/TasksRoutes');
 
 const host = "localhost";
 const port = 3000;
@@ -8,7 +9,9 @@ const port = 3000;
 const app = express();
 app.use(express.json());
 app.use(ProdutosRoutes);
+app.use(TasksRoutes);
 app.use(PrivateRoutes);
+
 
 
 
