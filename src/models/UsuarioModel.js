@@ -11,9 +11,9 @@ class Usuario {
   }
 
   static authenticate(login,password){
-    const userAuthIndex = Usuario.listaUsuarios.findIndex(user => user.login === login && user.password === password);
-    console.log(userAuthIndex+"Debug Usuario.Authenticate");
-    return Usuario.listaUsuarios[userAuthIndex];
+    const userAuth = Usuario.listaUsuarios.find(user => user.login === login && user.password === password);
+    console.log(userAuth+"Debug Usuario.Authenticate");
+    return userAuth;
   }
 
   static listar() {
