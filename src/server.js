@@ -9,6 +9,15 @@ const port = 3000;
 
 const app = express();
 app.use(express.json());
+
+
+app.get('/', (request, response)=>{
+
+    return response.send("Hello World!");
+
+})
+
+
 app.use(ProdutosRoutes);
 app.use(PublicRoutes);
 
@@ -17,12 +26,6 @@ app.use(PrivateRoutes);
 
 
 
-
-app.get('/', (request, response)=>{
-
-    return response.send("Hello World!");
-
-})
 
 
 
