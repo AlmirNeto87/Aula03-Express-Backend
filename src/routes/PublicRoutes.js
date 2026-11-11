@@ -1,6 +1,7 @@
 const express = require('express'); 
 const AuthController = require('../controllers/AuthController')
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 const PublicRoutes = express.Router(); // Filtro de Segurança 
 
@@ -14,7 +15,7 @@ PublicRoutes.post('/login',(request,response)=>{
             {id: dados.id,
             login: dados.login
             }    
-            , 'ABCDE123456@*#'
+            , process.env.APP_KEY_TOKEN
         )
         console.log(token);
         return response.json({

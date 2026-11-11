@@ -2,6 +2,7 @@ const express = require('express');
 const UsuariosRoutes = require('./UsuariosRoutes');
 const TasksRoutes = require('./TasksRoutes');
 const jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 const PrivateRoutes = express.Router();
 
@@ -23,7 +24,7 @@ PrivateRoutes.use((request, response, next) => {
 
     try {
 
-        const decoded = jwt.verify(token, 'ABCDE123456@*#');
+        const decoded = jwt.verify(token, process.env.APP_KEY_TOKEN);
 
         console.log("Token decodificado:", decoded);
 
