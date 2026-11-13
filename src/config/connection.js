@@ -9,12 +9,12 @@ const connection = new Sequelize({
   port: 3306
 });
 
-connection.define("Teste",{
- coluna_teste: DataTypes.STRING
-},{
-  tableName: "teste" /* comando para forcar o nome da tabela  */
-}
-);
+// connection.define("Teste",{
+//  coluna_teste: DataTypes.STRING
+// },{
+//   tableName: "teste" /* comando para forcar o nome da tabela  */
+// }
+// );
 
 /* Comando para sincronizar com o BD 
   Caso queira forcar toda vida para reiniciar a criacao da tabela utiliza-se
@@ -22,7 +22,7 @@ connection.define("Teste",{
   Caso queira somente fazer alteracoes apos ja ter criado a tabela utiliza-se 
   connection.sync({alter:true})
 */
-connection.sync();
+// connection.sync();
 
 
 module.exports = connection;

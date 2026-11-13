@@ -5,8 +5,8 @@ const UserTypesModel = connection.define(
     "UserTypesModel",
     {
         type: {
-            type: DataTypes.STRING(45), // = VARCHAR(45)
-            allowNull: false // = NOT NULL
+            type: DataTypes.STRING(45), // VARCHAR(45)
+            allowNull: false // NOT NULL
         }
     },
     {
