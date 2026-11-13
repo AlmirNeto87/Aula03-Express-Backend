@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 const connection = new Sequelize({
   database:"blog", 
@@ -8,5 +8,21 @@ const connection = new Sequelize({
   dialect: "mysql",
   port: 3306
 });
+
+connection.define("Teste",{
+ coluna_teste: DataTypes.STRING
+},{
+  tableName: "teste" /* comando para forcar o nome da tabela  */
+}
+);
+
+/* Comando para sincronizar com o BD 
+  Caso queira forcar toda vida para reiniciar a criacao da tabela utiliza-se
+  connection.sync({force: true})
+  Caso queira somente fazer alteracoes apos ja ter criado a tabela utiliza-se 
+  connection.sync({alter:true})
+*/
+connection.sync();
+
 
 module.exports = connection;
