@@ -1,7 +1,7 @@
 const express = require('express');
 const UsuariosRoutes = require('./UsuariosRoutes');
 const TasksRoutes = require('./TasksRoutes');
-// const UserRotas = require('./UserRotas');
+const UserRotas = require('./UserRotas');
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
@@ -47,7 +47,7 @@ PrivateRoutes.use((request, response, next) => {
 });
 
 PrivateRoutes.use(UsuariosRoutes);
-// PrivateRoutes.use(UserRotas);
+PrivateRoutes.use(UserRotas);
 PrivateRoutes.use(TasksRoutes);
 
 module.exports = PrivateRoutes;

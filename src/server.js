@@ -1,4 +1,5 @@
 const express = require('express');
+require('./models/models');
 const ProdutosRoutes = require('./routes/Produtosroutes');
 const PrivateRoutes = require('./routes/PrivateRoutes');
 const PublicRoutes = require('./routes/PublicRoutes');

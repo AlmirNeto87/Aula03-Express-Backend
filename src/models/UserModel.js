@@ -1,9 +1,9 @@
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
-const UserTypesModel = require("./UserTypesModel");
 
 class UserModel extends Model {
     static associate({ ProfileModel, UserTypesModel }) {
+
         UserModel.hasOne(ProfileModel, {
             foreignKey: 'user_id'
         });
@@ -11,7 +11,9 @@ class UserModel extends Model {
         UserModel.belongsTo(UserTypesModel, {
             foreignKey: 'user_type_id'
         });
+
     }
+
 }
 
 UserModel.init(

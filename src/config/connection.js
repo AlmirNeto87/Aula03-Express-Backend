@@ -1,9 +1,16 @@
 const { Sequelize, DataTypes } = require('sequelize');
+const path = require('path');
+
+require('dotenv').config({
+    path: path.resolve(__dirname, '../../.env')
+});
+
+console.log(process.env.BD_KEY)
 
 const connection = new Sequelize({
   database:"blog", 
   username:"root", 
-  password:"root",
+  password:process.env.BD_KEY,
   host: "localhost",
   dialect: "mysql",
   port: 3306

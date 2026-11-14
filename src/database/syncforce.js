@@ -1,11 +1,18 @@
+
 const connection = require('../config/connection');
 
-require('../models/UserTypesModel');
-require('../models/TagsModel');
-require('../models/UserModel');
-require('../models/ProfileModel');
-// require('../models/CommentsModel');
-// require('../models/PostModel');
-// require('../models/PostTagModel');
+// Carrega os Models e configura os relacionamentos
+require('../models');
 
-connection.sync({force: true});
+async function syncDatabase() {
+    try {
+        await connection.sync({ force: true });
+        console.log('Banco de dados sincronizado!');
+    } catch (error) {
+        console.error('Erro ao sincronizar:', error);
+    } finally {
+        await connection.close();
+    }
+}
+
+syncDatabase();

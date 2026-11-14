@@ -1,18 +1,19 @@
+const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
-const { DataTypes } = require("sequelize");
 
-const UserTypesModel = connection.define(
-    "UserTypesModel",
+class UserTypesModel extends Model {}
+
+UserTypesModel.init(
     {
         type: {
-            type: DataTypes.STRING(45), // VARCHAR(45)
-            allowNull: false // NOT NULL
+            type: DataTypes.STRING(45),
+            allowNull: false
         }
     },
     {
-        tableName: "user_types"
+        tableName: 'user_types',
+        sequelize: connection
     }
 );
-
 
 module.exports = UserTypesModel;
