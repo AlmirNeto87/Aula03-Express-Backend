@@ -1,13 +1,13 @@
 const express = require('express');
 const PostsController = require('../controllers/PostsController')
-const PostsRotas = express.Router();
+const PostsRoutes = express.Router();
 
 const postsController = new PostsController();
 // CRUD
-PostsRotas.get('/posts', postsController.listar);
-PostsRotas.get('/posts/:id', postsController.consultarPorId);
-PostsRotas.post('/posts', postsController.criar)
-PostsRotas.put('/posts/:id', postsController.atualizar)
-PostsRotas.delete('/posts/:id', postsController.deletar)
+PostsRoutes.get('/posts', postsController.listar);
+PostsRoutes.get('/posts/:id', postsController.consultarPorId);
+PostsRoutes.post('/posts', postsController.criar)
+PostsRoutes.put('/posts/:id', postsController.atualizar)
+PostsRoutes.delete('/posts/:id', postsController.deletar)
 
-module.exports = PostsRotas;
+module.exports = PostsRoutes;
