@@ -1,7 +1,7 @@
 const UserModel = require('./UserModel');
 const UserTypesModel = require('./UserTypesModel');
 const ProfileModel = require('./ProfileModel');
-const PostModel = require('./PostsModel')
+const PostModel = require('./PostModel')
 const TagsModel = require('./TagsModel')
 const PostTagModel = require('./PostTagModel');
 

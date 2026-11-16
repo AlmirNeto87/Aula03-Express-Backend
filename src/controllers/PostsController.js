@@ -6,15 +6,6 @@ const TagModel = require('../models/TagsModel');
 
 class PostsController {
 
-    constructor() {
-        UserModel.associate({ProfileModel})
-        PostModel.associate({
-            TagModel,
-            PostTagModel,
-            UserModel
-        });
-    }
-
     async listar(request, response) {
         let query = request.query;
         query = query.fields.split(',');
