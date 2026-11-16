@@ -1,19 +1,34 @@
+
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
 
-class Tags extends Model {}
+class TagsModel extends Model {
+ 
+  static associate({ PostModel }) {
+    TagsModel.belongsToMany(PostModel, {
+        through: 'posts_tags',
+        foreignKey: 'tags_id',
+        otherKey: 'post_id',
+        as: 'posts'
+    });
 
-Tags.init(
-  {
-    name: {
-        type: DataTypes.STRING(45),
-        allowNull: false
+  };
+  
+};
+
+TagsModel.init(
+    {
+        name: {
+            type: DataTypes.STRING(45),
+            allowNull: false
+        }
+    },
+    {
+        modelName: 'Tag',
+        tableName: 'tags',
+        timestamps: false,
+        sequelize: connection
     }
-  },
-  { 
-    timestamps: false,
-    sequelize: connection,
-  }
 );
 
-module.exports = Tags;
+module.exports = TagsModel;

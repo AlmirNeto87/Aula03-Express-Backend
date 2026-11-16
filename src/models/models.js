@@ -1,14 +1,18 @@
 const UserModel = require('./UserModel');
 const UserTypesModel = require('./UserTypesModel');
 const ProfileModel = require('./ProfileModel');
-const PostModel = require('./PostModel')
+const PostModel = require('./PostsModel')
+const TagsModel = require('./TagsModel')
+const PostTagModel = require('./PostTagModel');
 
 // Centralizando os Models
 const models = {
-    UserModel,
+     UserModel,
     UserTypesModel,
     ProfileModel,
-    PostModel
+    PostModel,
+    TagsModel,
+    PostTagModel
 };
 
 // Configurando os relacionamentos
