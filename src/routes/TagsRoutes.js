@@ -1,11 +1,11 @@
 const express = require('express');
-let tagsController = require('../controllers/TagsController')
-const TagsRotas = express.Router();
+const TagsController = require('../controllers/TagsController')
+const TagsRoutes = express.Router();
 
 
-tagsController = new tagsController();
+const tagsController = new TagsController();
 
-TagsRotas.get('/tags', tagsController.listar);
-TagsRotas.post('/tags', tagsController.criar)
+TagsRoutes.get('/tags', tagsController.listar);
+TagsRoutes.post('/tags', tagsController.criar)
 
-module.exports = TagsRotas;
+module.exports = TagsRoutes;

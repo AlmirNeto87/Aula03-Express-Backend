@@ -6,6 +6,7 @@ const UsuariosRoutes = require('./UsuariosRoutes');
 const TasksRoutes = require('./TasksRoutes');
 const UserRotas = require('./UserRotas');
 const UserTypesRotas = require('./UserTypesRoutes');
+const TagsRoutes = require('./TagsRoutes');
 
 
 const PrivateRoutes = express.Router();
@@ -52,6 +53,7 @@ PrivateRoutes.use((request, response, next) => {
 PrivateRoutes.use(UsuariosRoutes);
 PrivateRoutes.use(UserRotas);
 PrivateRoutes.use(TasksRoutes);
-PrivateRoutes.use(UserTypesRotas)
+PrivateRoutes.use(UserTypesRotas);
+PrivateRoutes.use(TagsRoutes);
 
 module.exports = PrivateRoutes;
