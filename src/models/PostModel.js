@@ -25,6 +25,8 @@ class PostModel extends Model {
             as: 'comments'
         });
 
+        
+
     }
 
 }
