@@ -4,10 +4,12 @@ require('dotenv').config()
 
 const UsuariosRoutes = require('./UsuariosRoutes');
 const TasksRoutes = require('./TasksRoutes');
+
 const UserRotas = require('./UserRotas');
 const UserTypesRotas = require('./UserTypesRoutes');
 const TagsRoutes = require('./TagsRoutes');
 const PostsRoutes = require('./PostsRoutes');
+const CommentsRoutes = require('./ComentsRoutes');
 
 
 const PrivateRoutes = express.Router();
@@ -52,10 +54,13 @@ PrivateRoutes.use((request, response, next) => {
 });
 
 PrivateRoutes.use(UsuariosRoutes);
-PrivateRoutes.use(UserRotas);
 PrivateRoutes.use(TasksRoutes);
+
+
+PrivateRoutes.use(UserRotas);
 PrivateRoutes.use(UserTypesRotas);
 PrivateRoutes.use(TagsRoutes);
 PrivateRoutes.use(PostsRoutes);
+PrivateRoutes.use(CommentsRoutes);
 
 module.exports = PrivateRoutes;

@@ -4,7 +4,7 @@ const connection = require('../config/connection');
 
 class PostModel extends Model {
 
-    static associate({ UserModel, TagsModel, PostTagModel }) {
+    static associate({ UserModel, TagsModel, PostTagModel, CommentsModel }) {
 
         // Um post pertence a um usuário
         PostModel.belongsTo(UserModel, {
@@ -18,6 +18,11 @@ class PostModel extends Model {
             foreignKey: 'post_id',
             otherKey: 'tags_id',
             as: 'tags'
+        });
+
+        PostModel.hasMany(CommentsModel, {
+            foreignKey: 'post_id',
+            as: 'comments'
         });
 
     }

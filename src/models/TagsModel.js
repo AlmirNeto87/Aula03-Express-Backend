@@ -3,18 +3,19 @@ const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
 
 class TagsModel extends Model {
- 
-  static associate({ PostModel }) {
-    TagsModel.belongsToMany(PostModel, {
-        through: 'posts_tags',
-        foreignKey: 'tags_id',
-        otherKey: 'post_id',
-        as: 'posts'
-    });
 
-  };
-  
-};
+    static associate({ PostModel, PostTagModel }) {
+
+        TagsModel.belongsToMany(PostModel, {
+            through: PostTagModel,
+            foreignKey: 'tags_id',
+            otherKey: 'post_id',
+            as: 'posts'
+        });
+
+    }
+
+}
 
 TagsModel.init(
     {

@@ -2,7 +2,7 @@ const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
 
 class UserModel extends Model {
-    static associate({ ProfileModel, UserTypesModel, PostModel }) {
+    static associate({ ProfileModel, UserTypesModel, PostModel, CommentsModel }) {
 
         UserModel.hasOne(ProfileModel, {
             foreignKey: 'user_id'
@@ -15,6 +15,11 @@ class UserModel extends Model {
          UserModel.hasMany(PostModel, {
             foreignKey: 'userId',
             as: 'posts'
+        });
+
+        UserModel.hasMany(CommentsModel, {
+        foreignKey: 'user_id',
+        as: 'comments'
         });
 
     }

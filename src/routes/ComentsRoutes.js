@@ -1,8 +1,8 @@
 const express = require('express');
-const CommentsController = require('../controllers/CommentsController')
+const ComentsController = require('../controllers/ComentsController')
 const CommentsRoutes = express.Router();
 
-const commentsController = new CommentsController();
+const commentsController = new ComentsController();
 
 CommentsRoutes.get('/comments', commentsController.listar);
 CommentsRoutes.post('/comments', commentsController.criar);

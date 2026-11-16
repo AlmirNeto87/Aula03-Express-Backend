@@ -8,12 +8,14 @@ PostTagModel.init(
     {
         post_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            primaryKey: true
         },
 
         tags_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            primaryKey: true
         }
     },
     {
