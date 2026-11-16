@@ -2,17 +2,22 @@
 const connection = require('../config/connection');
 
 // Carrega os Models e configura os relacionamentos
-require('../models');
+require('../models/models');
 
 async function syncDatabase() {
     try {
-        await connection.sync({ force: true });
-        console.log('Banco de dados sincronizado!');
+        await connection.authenticate();
+
+        console.log('Conexão com banco estabelecida!');
+
+        await connection.sync();
+
+        console.log('Tabelas sincronizadas com sucesso!');
+
     } catch (error) {
-        console.error('Erro ao sincronizar:', error);
-    } finally {
-        await connection.close();
+        console.error('Erro ao sincronizar banco:', error);
+        throw error;
     }
 }
 
-syncDatabase();
+module.exports = syncDatabase;

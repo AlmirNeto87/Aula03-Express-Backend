@@ -1,5 +1,6 @@
 const express = require('express');
 require('./models/models');
+const syncDatabase = require('./database/syncforce');
 const ProdutosRoutes = require('./routes/Produtosroutes');
 const PrivateRoutes = require('./routes/PrivateRoutes');
 const PublicRoutes = require('./routes/PublicRoutes');
@@ -17,6 +18,22 @@ app.get('/', (request, response)=>{
     return response.send("Hello World!");
 
 })
+
+async function startServer() {
+    try {
+        await syncDatabase();
+
+        app.listen(port, host, () => {
+            console.log(`Server running at http://${host}:${port}`);
+        });
+
+    } catch (error) {
+        console.error('Erro ao iniciar servidor:', error);
+        process.exit(1);
+    }
+}
+
+startServer();
 
 
 app.use(ProdutosRoutes);

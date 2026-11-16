@@ -1,8 +1,9 @@
 const exprees = require('express');
 const UsuarioController = require('../controllers/UsuariosController');
+const UsuariosRoutes = exprees.Router();
 
 const usuarioController = new UsuarioController();
-const UsuariosRoutes = exprees.Router();
+
 
 UsuariosRoutes.get('/usuarios',usuarioController.listar); 
 

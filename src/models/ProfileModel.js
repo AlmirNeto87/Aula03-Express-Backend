@@ -2,7 +2,18 @@
 const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
 
-class ProfileModel extends Model {}
+class ProfileModel extends Model {
+   static associate({ UserModel }) {
+
+        ProfileModel.belongsTo(UserModel, {
+            foreignKey: 'user_id'
+        });
+
+    };
+}
+
+
+
 
 ProfileModel.init(
     {

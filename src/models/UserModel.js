@@ -2,14 +2,19 @@ const { DataTypes, Model } = require('sequelize');
 const connection = require('../config/connection');
 
 class UserModel extends Model {
-    static associate({ ProfileModel, UserTypesModel }) {
+    static associate({ ProfileModel, UserTypesModel, PostModel }) {
 
         UserModel.hasOne(ProfileModel, {
             foreignKey: 'user_id'
         });
 
         UserModel.belongsTo(UserTypesModel, {
-            foreignKey: 'user_type_id'
+            foreignKey: 'type_id'
+        });
+
+         UserModel.hasMany(PostModel, {
+            foreignKey: 'userId',
+            as: 'posts'
         });
 
     }
@@ -35,7 +40,7 @@ UserModel.init(
             type: DataTypes.STRING(45),
             allowNull: false
         },
-        user_type_id: {
+        type_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
