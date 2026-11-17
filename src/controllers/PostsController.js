@@ -38,7 +38,21 @@ class PostsController {
         try {
 
             const posts = await PostModel.findAll({
-                attributes: atributos
+                attributes: atributos,
+                include: [
+                {
+                    model: UserModel,
+                    as: 'user',
+                    attributes: ['username']
+                },
+                {
+                    model: TagsModel,
+                    as: 'tags',
+                    through: {
+                        attributes: []
+                    }
+                }
+            ]
             });
 
             return response.json(posts);
@@ -72,29 +86,58 @@ class PostsController {
                     'created_at',
                     'updated_at'
                 ],
-
-                include: [{
+                include: [
+                {
                     model: UserModel,
                     as: 'user',
+                    attributes: ['username'],
+                 
+                    include: [
+                        {
+                            model: ProfileModel,
+                            as: 'profile',
+                            attributes: [
+                               'firstname',
+                                'surname',
+                                'picture_path'
+                                 ]
+                        }
 
-                    attributes: [
-                        'id',
-                        'email',
-                        'is_active',
-                        'username'
-                    ],
+                   ]
+                },
+                {
+                    model: TagsModel,
+                    as: 'tags',
+                    through: {
+                        attributes: []
+                    }
+                }
+                
+            ]
 
-                    include: [{
-                        model: ProfileModel,
-                        as: 'profile',
+                // include: [
+                //     {
+                //         model: UserModel,
+                //         as: 'user',
 
-                        attributes: [
-                            'firstname',
-                            'surname',
-                            'picture_path'
-                        ]
-                    }]
-                }]
+                //         attributes: [
+                //             'username'
+                //         ],
+
+                //         include: [
+                //             {
+                //                 model: ProfileModel,
+                //                 as: 'profile',
+                //                 attributes: [
+                //                     'firstname',
+                //                     'surname',
+                //                     'picture_path'
+                //                 ]
+                //             }
+                //         ]
+                //     }
+                     
+                // ]
             });
 
             if (!post) {
