@@ -18,21 +18,27 @@ class AuthController {
                 });
             }
 
+            // Verificar chave JWT
+            if (!process.env.APP_KEY_TOKEN) {
+                throw new Error('APP_KEY_TOKEN não configurada!');
+            }
+
             // Buscar usuário no banco de dados
             const usuario = await UserModel.findOne({
+                attributes: ['id', 'username', 'password'],
                 where: {
                     username: login
                 }
             });
 
-            // Não revelar se o usuário existe
+            // Validar existência do usuário
             if (!usuario) {
                 return response.status(401).json({
                     message: 'Login ou senha incorretos!'
                 });
             }
 
-            // Comparar senha enviada com hash salvo no banco
+            // Comparar senha com hash do banco
             const senhaValida = await bcrypt.compare(
                 password,
                 usuario.password
