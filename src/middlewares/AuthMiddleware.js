@@ -49,6 +49,14 @@ async function AuthMiddleware(request, response, next) {
             });
         }
 
+        //  ( Implementar Futuramente)
+        // TEste Para Usuario Ativo ou Inativo 
+        // if (!usuario.is_active) {
+        //     return response.status(403).json({
+        //         message: 'Sua conta está desativada!'
+        //     });
+        // }
+
         // Disponibilizar usuário autenticado
         request.user = {
             id: usuario.id,
