@@ -1,7 +1,8 @@
 
 const jwt = require('jsonwebtoken');
+const UserModel = require('../models/UserModel');
 
-function AuthMiddleware(request, response, next) {
+async function AuthMiddleware(request, response, next) {
 
     const authHeader = request.headers.authorization;
 
@@ -13,9 +14,9 @@ function AuthMiddleware(request, response, next) {
     }
 
     // Verificar formato Bearer
-    const [scheme, token] = authHeader.split(' ');
+    const [scheme, token, ...extra] = authHeader.trim().split(/\s+/);
 
-    if (scheme !== 'Bearer' || !token) {
+    if (scheme !== 'Bearer' || !token || extra.length > 0) {
         return response.status(401).json({
             message: 'Formato do token inválido! Utilize Bearer.'
         });
@@ -23,7 +24,7 @@ function AuthMiddleware(request, response, next) {
 
     try {
 
-        // Validar token
+        // Validar token JWT
         const decoded = jwt.verify(
             token,
             process.env.APP_KEY_TOKEN,
@@ -32,9 +33,27 @@ function AuthMiddleware(request, response, next) {
             }
         );
 
+        // Validar identificador do usuário
+        if (!decoded.sub || !/^\d+$/.test(decoded.sub)) {
+            return response.status(401).json({
+                message: 'Token inválido!'
+            });
+        }
+
+        // Buscar usuário no banco de dados
+        const usuario = await UserModel.findByPk(decoded.sub);
+
+        if (!usuario) {
+            return response.status(401).json({
+                message: 'Usuário não encontrado ou não autorizado!'
+            });
+        }
+
         // Disponibilizar usuário autenticado
         request.user = {
-            id: Number(decoded.sub)
+            id: usuario.id,
+            username: usuario.username,
+            type_id: usuario.type_id
         };
 
         return next();
