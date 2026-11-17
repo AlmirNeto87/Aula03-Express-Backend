@@ -10,6 +10,7 @@ const UserTypesRotas = require('./UserTypesRoutes');
 const TagsRoutes = require('./TagsRoutes');
 const PostsRoutes = require('./PostsRoutes');
 const CommentsRoutes = require('./ComentsRoutes');
+const PostTagsRoutes = require('./PostTagsRoutes');
 
 const PrivateRoutes = express.Router();
 
@@ -23,5 +24,6 @@ PrivateRoutes.use(UserTypesRotas);
 PrivateRoutes.use(TagsRoutes);
 PrivateRoutes.use(PostsRoutes);
 PrivateRoutes.use(CommentsRoutes);
+PrivateRoutes.use(PostTagsRoutes);
 
 module.exports = PrivateRoutes;
