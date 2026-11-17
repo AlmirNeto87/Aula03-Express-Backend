@@ -1,5 +1,6 @@
 const express = require('express');
 require('./models/models');
+require('dotenv').config();
 const syncDatabase = require('./database/syncforce');
 const ProdutosRoutes = require('./routes/Produtosroutes');
 const PrivateRoutes = require('./routes/PrivateRoutes');

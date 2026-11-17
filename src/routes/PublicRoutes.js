@@ -1,34 +1,13 @@
-const express = require('express'); 
-const AuthController = require('../controllers/AuthController')
-const jwt = require('jsonwebtoken');
-require('dotenv').config()
 
-const PublicRoutes = express.Router(); // Filtro de Segurança 
+const express = require('express');
+const AuthController = require('../controllers/AuthController');
 
-PublicRoutes.post('/login',(request,response)=>{
-    const {login , password} = request.body;
-    const auth = new AuthController();
-    const dados = auth.login(login, password); 
-    // console.log(dados+"debug PublicRoutes")
-    if(dados){
-        const token = jwt.sign(
-            {id: dados.id,
-            login: dados.login
-            }    
-            , process.env.APP_KEY_TOKEN
-        )
-        console.log(token);
-        return response.json({
-            token: token
-        });
-    };
+const PublicRoutes = express.Router();
 
-    return response.json({
-        message: "Login ou Senha Incorreto"
-    })
+const authController = new AuthController();
+
+PublicRoutes.post('/login', (request, response) => {
+    return authController.login(request, response);
 });
-
-
-
 
 module.exports = PublicRoutes;

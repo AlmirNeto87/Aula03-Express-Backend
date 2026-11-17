@@ -21,13 +21,17 @@ class CommentsModel extends Model {
         // Um comentário pode ter vários comentários filhos
         CommentsModel.hasMany(CommentsModel, {
             foreignKey: 'parent_id',
-            as: 'children'
+            as: 'children',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
         });
 
         // Um comentário pode pertencer a outro comentário
         CommentsModel.belongsTo(CommentsModel, {
             foreignKey: 'parent_id',
-            as: 'parent'
+            as: 'parent',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
         });
 
     }
@@ -54,7 +58,13 @@ CommentsModel.init(
 
         parent_id: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
+            references: {
+                model: 'comments',
+                key: 'id'
+            },
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
         },
 
         content: {

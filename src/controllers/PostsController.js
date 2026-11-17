@@ -85,7 +85,8 @@ class PostsController {
 
                     include: [{
                         model: ProfileModel,
-
+                        as: 'profile',
+                        
                         attributes: [
                             'firstname',
                             'surname',
