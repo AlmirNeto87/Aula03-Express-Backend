@@ -2,6 +2,7 @@
 const PostModel = require('../models/PostModel');
 const UserModel = require('../models/UserModel');
 const ProfileModel = require('../models/ProfileModel');
+const TagsModel = require('../models/TagsModel');
 const connection = require('../config/connection');
 
 class PostsController {
@@ -86,7 +87,7 @@ class PostsController {
                     include: [{
                         model: ProfileModel,
                         as: 'profile',
-                        
+
                         attributes: [
                             'firstname',
                             'surname',
@@ -115,44 +116,71 @@ class PostsController {
     }
 
     // CRIAR POST
+   
     async criar(request, response) {
 
-        const { tags, ...body } = request.body;
-
-        const transaction = await connection.transaction();
+        const transaction = await PostModel.sequelize.transaction();
 
         try {
 
-            const post = await PostModel.create(body, {
+            const body = request.body;
+
+            // Separar as Tags dos demais campos
+            const { tags, ...dadosPost } = body;
+
+            // Criar o Post
+            const post = await PostModel.create(dadosPost, {
                 transaction
             });
 
-            if (tags && tags.length > 0) {
+            // Associar Tags, caso tenham sido enviadas
+            if (tags !== undefined) {
 
-                await post.setTags(tags, {
-                    transaction
-                });
+                if (!Array.isArray(tags)) {
+                    await transaction.rollback();
 
+                    return response.status(400).json({
+                        message: 'Tags deve ser um array de IDs!'
+                    });
+                }
+
+                if (tags.length > 0) {
+
+                    await post.addTags(tags, {
+                        transaction
+                    });
+
+                }
             }
+
+            // Buscar Post com suas Tags
+            const postCriado = await PostModel.findByPk(post.id, {
+                include: [{
+                    model: TagsModel,
+                    as: 'tags'
+                }],
+                transaction
+            });
 
             await transaction.commit();
 
             return response.status(201).json({
                 message: 'Post cadastrado com sucesso!',
-                post
+                post: postCriado
             });
 
         } catch (error) {
 
             await transaction.rollback();
 
-            console.error('Erro ao criar post:', error);
+            console.error('Erro ao criar Post:', error);
 
             return response.status(500).json({
-                message: 'Erro ao cadastrar post!'
+                message: 'Erro ao cadastrar Post!'
             });
         }
-    }
+    };
+
 
     // ATUALIZAR POST
     async atualizar(request, response) {
