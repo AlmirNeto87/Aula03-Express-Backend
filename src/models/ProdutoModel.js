@@ -1,6 +1,24 @@
 class Produto {
-  static listaProdutos = [];
-  static contador = 0;
+  static listaProdutos = [
+    {
+      "id":1,
+      "nome":"Mouse",
+      "valor":100
+    },
+    {
+      "id":2,
+      "nome":"Teclado",
+      "valor":300
+    },
+    {
+      "id":3,
+      "nome":"Monitor",
+      "valor":1000
+
+    }
+
+  ];
+  static contador = 3;
 
   constructor(nome, valor) {
     this.id = ++Produto.contador;
