@@ -43,11 +43,6 @@ app.use(PublicRoutes);
 app.use(PrivateRoutes);
 
 
-
-
-
-
-
 app.listen(port, host, () => {
   console.log(`Server running at http://${host}:${port}`);
 });
